@@ -13,9 +13,7 @@ class HanoiSolver
 
     solve: ->
         discs = @game.firstTower.size()
-        if discs > 0
-            @solve_rec(discs, @TOWERS['first'], @TOWERS['second'], @TOWERS['third'])
-        else @solved = true
+        @solve_rec(discs, @TOWERS['first'], @TOWERS['second'], @TOWERS['third'])
 
     solve_rec: (discs, source, inter, destiny) ->
         if @only_one_movement_remaining discs

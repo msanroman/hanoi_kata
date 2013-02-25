@@ -17,13 +17,6 @@ describe 'Hanoi solver', ->
         solver = new HanoiSolver(new HanoiTowers(3))
         solver.get_log().should.be.empty
 
-    it 'should solve it in no movements with zero discs', ->
-        solver = new HanoiSolver(new HanoiTowers(0))
-        solver.solve()
-        steps = solver.get_log()
-        steps.should.be.empty
-        solver.is_solved().should.be.true
-
     describe 'with one disc', ->
 
         beforeEach ->
