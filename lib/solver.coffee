@@ -12,7 +12,7 @@ class HanoiSolver
         @solve_recursively(disks, @TOWERS['first'], @TOWERS['second'], @TOWERS['third'])
 
     solve_recursively: (remaining_disks, source, middle, destiny) ->
-        if @are_movements_remaining remaining_disks
+        if @there_are_movements_remaining remaining_disks
             @solve_recursively remaining_disks-1, source, destiny, middle
             @moveDisk source, destiny
             @solve_recursively remaining_disks-1, middle, source, destiny
@@ -27,5 +27,5 @@ class HanoiSolver
     get_log: ->
         @steps
 
-    are_movements_remaining: (remaining_disks) ->
+    there_are_movements_remaining: (remaining_disks) ->
         remaining_disks > 0
