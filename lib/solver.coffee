@@ -12,9 +12,7 @@ class HanoiSolver
         @solve_rec(disks, @TOWERS['first'], @TOWERS['second'], @TOWERS['third'])
 
     solve_rec: (remaining_disks, source, middle, destiny) ->
-        if @only_one_movement_remaining remaining_disks
-            @moveDisk source, destiny
-        else
+        if @are_movements_remaining remaining_disks
             @solve_rec remaining_disks-1, source, destiny, middle
             @moveDisk source, destiny
             @solve_rec remaining_disks-1, middle, source, destiny
@@ -29,5 +27,5 @@ class HanoiSolver
     get_log: ->
         @steps
 
-    only_one_movement_remaining: (remaining_disks) ->
-        remaining_disks == 1
+    are_movements_remaining: (remaining_disks) ->
+        remaining_disks > 0
