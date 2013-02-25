@@ -9,10 +9,6 @@ describe 'Hanoi solver', ->
         solver = new HanoiSolver(new HanoiTowers(3))
         solver.should.not.be.null
 
-    it 'isn\'t solved at beggining', ->
-        solver = new HanoiSolver(new HanoiTowers(3))
-        solver.is_solved().should.be.false
-
     it 'should have an empty solve steps log at beggining', ->
         solver = new HanoiSolver(new HanoiTowers(3))
         solver.get_log().should.be.empty
@@ -26,8 +22,7 @@ describe 'Hanoi solver', ->
             @solver.solve()
             steps = @solver.get_log()
             steps.should.have.length 1
-            steps[0].should.equal 'From 1 tower to 3'
-            @solver.is_solved().should.be.true
+            steps[0].should.equal 'From 1 to 3'
 
     describe 'with multiple discs:', ->
 
@@ -36,14 +31,21 @@ describe 'Hanoi solver', ->
             solver.solve()
             steps = solver.get_log()
             steps.should.have.length 3
-            steps[0].should.equal 'From 1 tower to 2'
-            steps[1].should.equal 'From 1 tower to 3'
-            steps[2].should.equal 'From 2 tower to 3'
+            steps[0].should.equal 'From 1 to 2'
+            steps[1].should.equal 'From 1 to 3'
+            steps[2].should.equal 'From 2 to 3'
 
         it 'for three discs should solve it in 7 steps', ->
             solver = new HanoiSolver(new HanoiTowers(3))
             solver.solve()
             steps = solver.get_log()
+            steps[0].should.equal 'From 1 to 3'
+            steps[1].should.equal 'From 1 to 2'
+            steps[2].should.equal 'From 3 to 2'
+            steps[3].should.equal 'From 1 to 3'
+            steps[4].should.equal 'From 2 to 1'
+            steps[5].should.equal 'From 2 to 3'
+            steps[6].should.equal 'From 1 to 3'
             steps.should.have.length 7
 
         it 'for four discs should solve it in 15 steps', ->

@@ -5,32 +5,29 @@ class HanoiSolver
 
     constructor: (game) ->
         @game = game
-        @solved = false
         @steps = []
 
-    is_solved: ->
-        @solved
-
     solve: ->
-        discs = @game.firstTower.size()
-        @solve_rec(discs, @TOWERS['first'], @TOWERS['second'], @TOWERS['third'])
+        disks = @game.firstTower.size()
+        @solve_rec(disks, @TOWERS['first'], @TOWERS['second'], @TOWERS['third'])
 
-    solve_rec: (discs, source, inter, destiny) ->
-        if @only_one_movement_remaining discs
-            @log_movement source, destiny
-            @game.moveFrom(source).to(destiny)
-            @solved = true
+    solve_rec: (remaining_disks, source, middle, destiny) ->
+        if @only_one_movement_remaining remaining_disks
+            @moveDisk source, destiny
         else
-            @solve_rec discs-1, source, destiny, inter
-            @log_movement source, destiny
-            @game.moveFrom(source).to(destiny)
-            @solve_rec discs-1, inter, source, destiny
+            @solve_rec remaining_disks-1, source, destiny, middle
+            @moveDisk source, destiny
+            @solve_rec remaining_disks-1, middle, source, destiny
+
+    moveDisk: (source, destiny) ->
+        @log_movement source, destiny
+        @game.moveFrom(source).to(destiny)
 
     log_movement: (source, destiny) ->
-        @steps.push "From #{source} tower to #{destiny}"
+        @steps.push "From #{source} to #{destiny}"
 
     get_log: ->
         @steps
 
-    only_one_movement_remaining: (discs) ->
-        discs == 1
+    only_one_movement_remaining: (remaining_disks) ->
+        remaining_disks == 1
