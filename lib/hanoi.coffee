@@ -10,11 +10,9 @@ class HanoiTowers
         @towers = [@firstTower, @secondTower, @thirdTower]
 
     moveFrom: (peg) ->
-        @from = true
         @disc = @towers[peg-1].pop()
         @
 
     to: (peg) ->
-        @from = false
         @towers[peg-1].push @disc
         @
