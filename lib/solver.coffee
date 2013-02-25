@@ -9,13 +9,13 @@ class HanoiSolver
 
     solve: ->
         disks = @game.firstTower.size()
-        @solve_rec(disks, @TOWERS['first'], @TOWERS['second'], @TOWERS['third'])
+        @solve_recursively(disks, @TOWERS['first'], @TOWERS['second'], @TOWERS['third'])
 
-    solve_rec: (remaining_disks, source, middle, destiny) ->
+    solve_recursively: (remaining_disks, source, middle, destiny) ->
         if @are_movements_remaining remaining_disks
-            @solve_rec remaining_disks-1, source, destiny, middle
+            @solve_recursively remaining_disks-1, source, destiny, middle
             @moveDisk source, destiny
-            @solve_rec remaining_disks-1, middle, source, destiny
+            @solve_recursively remaining_disks-1, middle, source, destiny
 
     moveDisk: (source, destiny) ->
         @log_movement source, destiny
