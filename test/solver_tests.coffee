@@ -25,12 +25,8 @@ describe 'Hanoi solver', ->
         it 'should solve it moving from first to third', ->
             @solver.solve()
             steps = @solver.get_log()
-            steps[0].should.equal 'From 1 tower to 3'
-
-        it 'should solve it in a single step', ->
-            @solver.solve()
-            steps = @solver.get_log()
             steps.should.have.length 1
+            steps[0].should.equal 'From 1 tower to 3'
             @solver.is_solved().should.be.true
 
     describe 'with multiple discs:', ->
